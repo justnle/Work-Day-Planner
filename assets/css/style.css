@@ -37,3 +37,7 @@ tr {
   position: absolute;
   width: 100%;
 }
+
+.form-control {
+    border: 0;
+}
