@@ -11,15 +11,17 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="assets/css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/53455dd245.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Work Day Planner</title>
   </head>
   <body>
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h2 class="display-4">Work Day Planner</h2>
-        <p class="lead">
-          Event schedule for a standard work day.
-        </p>
+        <p class="lead" id="title-date"></p>
       </div>
     </div>
 
@@ -89,6 +91,32 @@
               <td id="save-button">
                 <img src="assets/images/save_icon.png" />
               </td>
+            </tr>
+
+            <tr class="border">
+              <th>18:00</th>
+              <td>
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Input event"
+                  aria-label="Input event"
+                  aria-describedby="button-addon2"
+                />
+                </td>
+                <td>
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    id="button-addon2"
+                  >
+                    <i class="far fa-save"></i>
+                  </button>
+                </div>
+            </td>
+              </div>
             </tr>
           </tbody>
         </table>
