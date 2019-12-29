@@ -3,10 +3,6 @@ html {
   position: relative;
 }
 
-img {
-  height: 15%;
-}
-
 th,
 td {
   border-right: 1px solid lightgrey;
@@ -25,11 +21,6 @@ tr {
 #time,
 #save-button {
   width: 5%;
-}
-
-#save-button {
-  text-align: center;
-  background-color: gray;
 }
 
 .sticky-footer {
