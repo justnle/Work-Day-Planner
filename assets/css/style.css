@@ -8,6 +8,10 @@ td {
   border-right: 1px solid lightgrey;
 }
 
+#time {
+    border-left: 1px solid lightgray;
+}
+
 #input-cell {
     padding: 0px;
     position: relative;
@@ -20,10 +24,6 @@ td {
     border: 0;
     padding-left: 5px;
     position: absolute;
-}
-
-#time {
-  border-left: 1px solid lightgrey;
 }
 
 #save-button {
