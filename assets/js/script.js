@@ -2,6 +2,7 @@ var now = moment();
 var current = moment().format('dddd, MMMM Do YYYY');
 var scheduleArr = [];
 var storedSchedule;
+var savedSchedule;
 
 $('#title-date').html('Event schedule for <b>' + current + '</b>');
 
@@ -10,6 +11,7 @@ $(document).ready(function() {
 
   function init() {
     saveEvent();
+    displaySchedule();
   }
 
   // save event version 0.3
@@ -36,7 +38,7 @@ $(document).ready(function() {
           if (storedSchedule[i].hasOwnProperty(trId)) {
             storedSchedule[i][trId] = textAreaVal;
             scheduleArr = storedSchedule;
-            localStorage.clear();
+            // localStorage.clear();
             localStorage.setItem('schedule', JSON.stringify(scheduleArr));
             console.log('replacing stuff');
             return;
@@ -48,5 +50,16 @@ $(document).ready(function() {
         console.log('adding new stuff to the array now');
       }
     });
+  }
+
+  function displaySchedule() {
+      savedSchedule = JSON.parse(localStorage.getItem('schedule'));
+
+      for (var i = 0; i < savedSchedule.length; i++) {
+          var getKey = Object.keys(savedSchedule[i]);
+          var getValue = Object.values(savedSchedule[i]);
+          $('#area-' + getKey).html(getValue[0]);
+      }
+      
   }
 });
