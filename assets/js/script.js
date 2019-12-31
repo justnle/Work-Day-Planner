@@ -56,10 +56,12 @@ $(document).ready(function() {
   function displaySchedule() {
     savedSchedule = JSON.parse(localStorage.getItem('schedule'));
 
-    for (var i = 0; i < savedSchedule.length; i++) {
-      var getKey = Object.keys(savedSchedule[i]);
-      var getValue = Object.values(savedSchedule[i]);
-      $('#area-' + getKey).html(getValue[0]);
+    if (savedSchedule !== null) {
+      for (var i = 0; i < savedSchedule.length; i++) {
+        var getKey = Object.keys(savedSchedule[i]);
+        var getValue = Object.values(savedSchedule[i]);
+        $('#area-' + getKey).html(getValue[0]);
+      }
     }
   }
 
@@ -68,8 +70,16 @@ $(document).ready(function() {
 
     if (existingStorage !== null) {
       scheduleArr = existingStorage;
+    } else {
+      scheduleArr = [];
     }
   }
 
-  // create a clear schedule button!
+    // function clearSchedule() {
+    //     $('#clear-button').on('click', function() {
+    //         $('textarea').html("");
+    //         localStorage.clear();
+    //         displaySchedule();
+    //     });
+    // } this does not work properly
 });
