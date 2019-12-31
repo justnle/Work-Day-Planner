@@ -1,6 +1,7 @@
 var now = moment();
 var current = moment().format('dddd, MMMM Do YYYY');
 var scheduleArr = [];
+var scheduleObj;
 var storedSchedule;
 var savedSchedule;
 
@@ -10,11 +11,12 @@ $(document).ready(function() {
   init();
 
   function init() {
-    saveEvent();
+    getLocalStorage();
     displaySchedule();
+    saveEvent();
   }
 
-  // save event version 0.3
+  // save event version 1.0
   function saveEvent() {
     $('.save-button').on('click', function() {
       var trId = $(this)
@@ -25,7 +27,7 @@ $(document).ready(function() {
         .find('textarea')
         .val()
         .trim();
-      var scheduleObj = {};
+      scheduleObj = {};
       storedSchedule = JSON.parse(localStorage.getItem('schedule'));
 
       if (storedSchedule === null) {
@@ -38,7 +40,6 @@ $(document).ready(function() {
           if (storedSchedule[i].hasOwnProperty(trId)) {
             storedSchedule[i][trId] = textAreaVal;
             scheduleArr = storedSchedule;
-            // localStorage.clear();
             localStorage.setItem('schedule', JSON.stringify(scheduleArr));
             console.log('replacing stuff');
             return;
@@ -53,13 +54,22 @@ $(document).ready(function() {
   }
 
   function displaySchedule() {
-      savedSchedule = JSON.parse(localStorage.getItem('schedule'));
+    savedSchedule = JSON.parse(localStorage.getItem('schedule'));
 
-      for (var i = 0; i < savedSchedule.length; i++) {
-          var getKey = Object.keys(savedSchedule[i]);
-          var getValue = Object.values(savedSchedule[i]);
-          $('#area-' + getKey).html(getValue[0]);
-      }
-      
+    for (var i = 0; i < savedSchedule.length; i++) {
+      var getKey = Object.keys(savedSchedule[i]);
+      var getValue = Object.values(savedSchedule[i]);
+      $('#area-' + getKey).html(getValue[0]);
+    }
   }
+
+  function getLocalStorage() {
+    var existingStorage = JSON.parse(localStorage.getItem('schedule'));
+
+    if (existingStorage !== null) {
+      scheduleArr = existingStorage;
+    }
+  }
+
+  // create a clear schedule button!
 });
