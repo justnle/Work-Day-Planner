@@ -9,33 +9,11 @@ $(document).ready(function() {
   init();
 
   function init() {
-    // saveEventV02();
-    saveEventV03();
+    saveEvent();
   }
 
-  //   function saveEventV02() {
-  //     $('.save-button').on('click', function() {
-  //       var trId = $(this)
-  //         .closest('tr')
-  //         .attr('id');
-  //       var textAreaVal = $(this)
-  //         .closest('tr')
-  //         .find('textarea')
-  //         .val();
-  //       var scheduleObj = {};
-
-  //       if (textAreaVal === '') {
-  //         return;
-  //       } else {
-  //         checkExisting(trId);
-  //         scheduleObj[trId] = textAreaVal.trim();
-  //         scheduleArr.push(scheduleObj);
-  //         localStorage.setItem('schedule', JSON.stringify(scheduleArr));
-  //       }
-  //     });
-  //   }
-
-  function saveEventV03() {
+  // save event version 0.3
+  function saveEvent() {
     $('.save-button').on('click', function() {
       var trId = $(this)
         .closest('tr')
@@ -47,25 +25,6 @@ $(document).ready(function() {
         .trim();
       var scheduleObj = {};
       storedSchedule = JSON.parse(localStorage.getItem('schedule'));
-
-      //   if (storedSchedule !== null) {
-      //     for (var i = 0; i < storedSchedule.length; i++) {
-      //       if (storedSchedule[i].hasOwnProperty(trId)) {
-      //         storedSchedule[i][trId] = textAreaVal;
-      //         console.log('stuck here');
-      //       } else {
-      //         scheduleObj[trId] = textAreaVal;
-      //         scheduleArr.push(scheduleObj);
-      //         localStorage.setItem('schedule', JSON.stringify(scheduleArr));
-      //         console.log('adding new stuff to the array now');
-      //       }
-      //     }
-      //   } else {
-      //     scheduleObj[trId] = textAreaVal;
-      //     scheduleArr.push(scheduleObj);
-      //     localStorage.setItem('schedule', JSON.stringify(scheduleArr));
-      //     console.log('creating initial array');
-      //   }
 
       if (storedSchedule === null) {
         scheduleObj[trId] = textAreaVal;
@@ -90,19 +49,4 @@ $(document).ready(function() {
       }
     });
   }
-
-  //   function checkExisting(x) {
-  //     storedSchedule = JSON.parse(localStorage.getItem('schedule'));
-  //     console.log(storedSchedule);
-
-  //     if (storedSchedule !== null) {
-  //       for (var i = 0; i < storedSchedule.length; i++) {
-  //         if (storedSchedule[i].hasOwnProperty(x)) {
-  //           storedSchedule[i][x] =
-  //         } else {
-  //           console.log(storedSchedule.hasOwnProperty(x));
-  //           alert('no');
-  //         }
-  //       }
-  //     }
 });
