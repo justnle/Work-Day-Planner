@@ -8,12 +8,12 @@ td {
   border-right: 1px solid lightgrey;
 }
 
-#time {
+.time {
     border-left: 1px solid lightgray;
 }
 
-#input-cell {
-    padding: 0px;
+.input-cell {
+    padding: 0px !important;
     position: relative;
 }
 
@@ -31,7 +31,7 @@ td {
   background-color: lightgrey;
 }
 
-#time,
+.time,
 .save-button-cell {
   width: 5%;
 }
