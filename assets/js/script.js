@@ -83,6 +83,7 @@ $(document).ready(function() {
 
   function scheduleFocus() {
     var currentHourInt = parseInt(moment().format('HH'));
+    currentHourInt = 13;
 
     var timeIDs = $('#schedule-table tr[id]')
       .map(function() {
@@ -95,15 +96,18 @@ $(document).ready(function() {
       if (timeIDsInt < currentHourInt) {
         $('#' + timeIDs[i])
           .find('textarea')
-          .css('background-color', 'red');
+          .css('background-color', 'grey');
+          // past
       } else if (timeIDsInt === currentHourInt) {
         $('#' + timeIDs[i])
           .find('textarea')
-          .css('background-color', 'green');
+          .css('background-color', '#ccffff');
+          // current
       } else {
         $('#' + timeIDs[i])
           .find('textarea')
-          .css('background-color', 'blue');
+          .css('background-color', 'lightblue');
+          // future
       }
     }
   }
