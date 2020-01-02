@@ -27,14 +27,17 @@ $(document).ready(function() {
   }
 
   function updateTime() {
-    var currentDate = moment().format('dddd, MMMM Do YYYY');
+    // var currentDate = moment().format('dddd, MMMM Do YYYY');
+    var currentDate = moment().format('dddd, MMMM Do');
+    var currentYear = moment().format('YYYY');
     var currentTime = moment().format('HH:mm:ss');
     $('#title-date').html(currentDate);
     $('#title-time').html(
-      'Here is your schedule for today. The time is: <b>' +
+      'Here is your schedule for today. The current time is: <b>' +
         currentTime +
         '</b>.'
     );
+    $('#title-year').html(currentYear);
   }
 
   function saveEvent() {
@@ -66,6 +69,7 @@ $(document).ready(function() {
     });
   }
 
+  // instead of clearing it, keep it and create a new obj
   function clearYesterday() {
     storedSchedule = JSON.parse(localStorage.getItem('schedule'));
     storedDate = JSON.parse(localStorage.getItem('date'));

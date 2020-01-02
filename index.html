@@ -20,9 +20,16 @@
   <body>
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
-        <h2 class="display-4 font-weight-bold" id="title-date"></h2>
+        <div class="d-flex justify-content-between">
+          <div>
+            <h2 class="display-4 font-weight-bold" id="title-date"></h2>
+          </div>
+          <div>
+            <h4 class="font-weight-bold" id="title-year"></h4>
+          </div>
+        </div>
         <div id="current-date-time">
-            <p class="" id="title-time"></p>
+          <p class="" id="title-time"></p>
         </div>
       </div>
     </div>
@@ -178,9 +185,11 @@
           </tbody>
         </table>
         <div class="d-flex">
-            <div class="ml-auto">
-            <button type="button" class="btn btn-danger" id="clear-button">Clear Schedule</button>
-            </div>
+          <div class="ml-auto">
+            <button type="button" class="btn btn-danger" id="clear-button">
+              Clear Schedule
+            </button>
+          </div>
         </div>
       </div>
     </div>
