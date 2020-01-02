@@ -1,19 +1,24 @@
-var now = moment();
-var current = moment().format('dddd, MMMM Do YYYY');
 var scheduleArr = [];
 var scheduleObj;
 var storedSchedule;
 var savedSchedule;
 
-$('#title-date').html('Event schedule for <b>' + current + '</b>');
-
 $(document).ready(function() {
   init();
+  updateTime();
+  setInterval(updateTime, 1000);
 
   function init() {
     getLocalStorage();
     displaySchedule();
     saveEvent();
+  }
+
+  function updateTime() {
+    var currentDate = moment().format('dddd, MMMM Do YYYY');
+    var currentTime = moment().format('HH:mm:ss');
+    $('#title-date').html('Event schedule for <b>' + currentDate + '</b>');
+    $('#title-time').html('The current time is: <b>' + currentTime + '</b>');
   }
 
   // save event version 1.0
@@ -75,11 +80,11 @@ $(document).ready(function() {
     }
   }
 
-    // function clearSchedule() {
-    //     $('#clear-button').on('click', function() {
-    //         $('textarea').html("");
-    //         localStorage.clear();
-    //         displaySchedule();
-    //     });
-    // } this does not work properly
+  // function clearSchedule() {
+  //     $('#clear-button').on('click', function() {
+  //         $('textarea').html("");
+  //         localStorage.clear();
+  //         displaySchedule();
+  //     });
+  // } this does not work properly
 });
