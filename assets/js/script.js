@@ -1,28 +1,42 @@
 var scheduleArr = [];
-var scheduleObj;
+var scheduleObj = {};
+var dateArr = [];
+var dateObj = {};
 var storedSchedule;
 var savedSchedule;
+var todaysDate = moment().format('LL');
 
 $(document).ready(function() {
   init();
-  updateTime();
-  setInterval(updateTime, 1000);
 
   function init() {
+    todaysDateLocal();
+    updateTime();
+    setInterval(updateTime, 1000);
+    clearYesterday();
     getLocalStorage();
     scheduleFocus();
     displaySchedule();
     saveEvent();
   }
 
+  function todaysDateLocal() {
+    dateObj['date'] = todaysDate;
+    dateArr.push(dateObj);
+    localStorage.setItem('date', JSON.stringify(dateArr));
+  }
+
   function updateTime() {
     var currentDate = moment().format('dddd, MMMM Do YYYY');
     var currentTime = moment().format('HH:mm:ss');
-    $('#title-date').html('Event schedule for <b>' + currentDate + '</b>');
-    $('#title-time').html('The current time is: <b>' + currentTime + '</b>');
+    $('#title-date').html(currentDate);
+    $('#title-time').html(
+      'Here is your schedule for today. The time is: <b>' +
+        currentTime +
+        '</b>.'
+    );
   }
 
-  // save event version 1.0
   function saveEvent() {
     $('.save-button').on('click', function() {
       var trId = $(this)
@@ -33,30 +47,39 @@ $(document).ready(function() {
         .find('textarea')
         .val()
         .trim();
-      scheduleObj = {};
-      storedSchedule = JSON.parse(localStorage.getItem('schedule'));
 
-      if (storedSchedule === null) {
-        scheduleObj[trId] = textAreaVal;
-        scheduleArr.push(scheduleObj);
-        localStorage.setItem('schedule', JSON.stringify(scheduleArr));
-        console.log('creating initial array');
-      } else {
-        for (var i = 0; i < storedSchedule.length; i++) {
-          if (storedSchedule[i].hasOwnProperty(trId)) {
-            storedSchedule[i][trId] = textAreaVal;
-            scheduleArr = storedSchedule;
-            localStorage.setItem('schedule', JSON.stringify(scheduleArr));
-            console.log('replacing stuff');
-            return;
-          }
+      storedSchedule = JSON.parse(localStorage.getItem('schedule'));
+      scheduleObj = {};
+
+      scheduleObj[trId] = textAreaVal;
+      scheduleArr.push(scheduleObj);
+      localStorage.setItem('schedule', JSON.stringify(scheduleArr));
+
+      for (var i = 0; i < storedSchedule.length; i++) {
+        if (storedSchedule[i].hasOwnProperty(trId)) {
+          storedSchedule[i][trId] = textAreaVal;
+          scheduleArr = storedSchedule;
+          localStorage.setItem('schedule', JSON.stringify(scheduleArr));
+          return;
         }
-        scheduleObj[trId] = textAreaVal;
-        scheduleArr.push(scheduleObj);
-        localStorage.setItem('schedule', JSON.stringify(scheduleArr));
-        console.log('adding new stuff to the array now');
       }
     });
+  }
+
+  function clearYesterday() {
+    storedSchedule = JSON.parse(localStorage.getItem('schedule'));
+    storedDate = JSON.parse(localStorage.getItem('date'));
+
+    if (storedSchedule === null) {
+      scheduleArr.push(dateObj);
+      localStorage.setItem('schedule', JSON.stringify(scheduleArr));
+    } else {
+      if (storedSchedule[0]['date'] !== storedDate[0]['date']) {
+        localStorage.removeItem('schedule');
+        scheduleArr.push(dateObj);
+        localStorage.setItem('schedule', JSON.stringify(scheduleArr));
+      } 
+    }
   }
 
   function displaySchedule() {
