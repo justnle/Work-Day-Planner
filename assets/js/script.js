@@ -10,6 +10,7 @@ $(document).ready(function() {
 
   function init() {
     getLocalStorage();
+    scheduleFocus();
     displaySchedule();
     saveEvent();
   }
@@ -77,6 +78,33 @@ $(document).ready(function() {
       scheduleArr = existingStorage;
     } else {
       scheduleArr = [];
+    }
+  }
+
+  function scheduleFocus() {
+    var currentHourInt = parseInt(moment().format('HH'));
+
+    var timeIDs = $('#schedule-table tr[id]')
+      .map(function() {
+        return this.id;
+      })
+      .get();
+
+    for (var i = 0; i < timeIDs.length; i++) {
+      var timeIDsInt = parseInt(timeIDs[i]);
+      if (timeIDsInt < currentHourInt) {
+        $('#' + timeIDs[i])
+          .find('textarea')
+          .css('background-color', 'red');
+      } else if (timeIDsInt === currentHourInt) {
+        $('#' + timeIDs[i])
+          .find('textarea')
+          .css('background-color', 'green');
+      } else {
+        $('#' + timeIDs[i])
+          .find('textarea')
+          .css('background-color', 'blue');
+      }
     }
   }
 
