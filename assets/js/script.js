@@ -11,11 +11,16 @@ $(document).ready(function() {
 
   function init() {
     todaysDateLocal();
+
     updateTime();
     setInterval(updateTime, 1000);
+
     clearYesterday();
     getLocalStorage();
+
     scheduleFocus();
+    setInterval(scheduleFocus, 1000);
+    
     displaySchedule();
     saveEvent();
   }
@@ -27,7 +32,6 @@ $(document).ready(function() {
   }
 
   function updateTime() {
-    // var currentDate = moment().format('dddd, MMMM Do YYYY');
     var currentDate = moment().format('dddd, MMMM Do');
     var currentYear = moment().format('YYYY');
     var currentTime = moment().format('HH:mm:ss');
@@ -70,6 +74,11 @@ $(document).ready(function() {
   }
 
   // instead of clearing it, keep it and create a new obj
+  // change 'schedule' to 'todaysSchedule'
+  // make storedSchedule[0]['date'] a key 'DATE'
+  // move 'todaysSchedule' value to key 'DATE'
+  // clear todaysSchedule?
+
   function clearYesterday() {
     storedSchedule = JSON.parse(localStorage.getItem('schedule'));
     storedDate = JSON.parse(localStorage.getItem('date'));
