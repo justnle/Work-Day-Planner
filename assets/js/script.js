@@ -19,6 +19,7 @@ $(document).ready(function() {
     setInterval(scheduleFocus, 1000);
     displaySchedule();
     saveEvent();
+    clearSchedule();
   }
 
   function storeTodaysDate() {
@@ -137,11 +138,16 @@ $(document).ready(function() {
     }
   }
 
-  // function clearSchedule() {
-  //     $('#clear-button').on('click', function() {
-  //         $('textarea').html("");
-  //         localStorage.clear();
-  //         displaySchedule();
-  //     });
-  // } this does not work properly
+  function clearSchedule() {
+    $('#clear-button').on('click', function() {
+      savedSchedule = JSON.parse(localStorage.getItem('todaySchedule'));
+
+      if (savedSchedule.length <= 1) {
+        return;
+      } else {
+        localStorage.removeItem('todaySchedule');
+        location.reload();
+      }
+    });
+  }
 });
