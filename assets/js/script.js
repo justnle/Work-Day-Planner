@@ -34,7 +34,7 @@ $(document).ready(function() {
     var currentTime = moment().format('HH:mm:ss');
     $('#title-date').html(currentDate);
     $('#title-time').html(
-      'Here is your schedule for today. The current time is: <b>' +
+      'Here is your schedule for today. The current time is: <b class="font-weight-bold">' +
         currentTime +
         '</b>.'
     );
