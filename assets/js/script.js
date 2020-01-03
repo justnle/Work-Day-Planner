@@ -10,28 +10,28 @@ $(document).ready(function() {
   init();
 
   function init() {
-    todaysDateLocal();
+    storeTodaysDate();
 
-    updateTime();
-    setInterval(updateTime, 1000);
+    update();
+    // setInterval(update, 1000);
 
-    clearYesterday();
-    getLocalStorage();
+    newDay();
+    checkLocalStorage();
 
     scheduleFocus();
     setInterval(scheduleFocus, 1000);
-    
+
     displaySchedule();
     saveEvent();
   }
 
-  function todaysDateLocal() {
+  function storeTodaysDate() {
     dateObj['date'] = todaysDate;
     dateArr.push(dateObj);
     localStorage.setItem('date', JSON.stringify(dateArr));
   }
 
-  function updateTime() {
+  function update() {
     var currentDate = moment().format('dddd, MMMM Do');
     var currentYear = moment().format('YYYY');
     var currentTime = moment().format('HH:mm:ss');
@@ -42,6 +42,7 @@ $(document).ready(function() {
         '</b>.'
     );
     $('#title-year').html(currentYear);
+    setInterval(update, 1000);
   }
 
   function saveEvent() {
@@ -55,48 +56,45 @@ $(document).ready(function() {
         .val()
         .trim();
 
-      storedSchedule = JSON.parse(localStorage.getItem('schedule'));
+      storedSchedule = JSON.parse(localStorage.getItem('todaySchedule'));
       scheduleObj = {};
 
       scheduleObj[trId] = textAreaVal;
       scheduleArr.push(scheduleObj);
-      localStorage.setItem('schedule', JSON.stringify(scheduleArr));
+      localStorage.setItem('todaySchedule', JSON.stringify(scheduleArr));
 
       for (var i = 0; i < storedSchedule.length; i++) {
         if (storedSchedule[i].hasOwnProperty(trId)) {
           storedSchedule[i][trId] = textAreaVal;
           scheduleArr = storedSchedule;
-          localStorage.setItem('schedule', JSON.stringify(scheduleArr));
+          localStorage.setItem('todaySchedule', JSON.stringify(scheduleArr));
           return;
         }
       }
     });
   }
 
-  // instead of clearing it, keep it and create a new obj
-  // change 'schedule' to 'todaysSchedule'
-  // make storedSchedule[0]['date'] a key 'DATE'
-  // move 'todaysSchedule' value to key 'DATE'
-  // clear todaysSchedule?
-
-  function clearYesterday() {
-    storedSchedule = JSON.parse(localStorage.getItem('schedule'));
+  function newDay() {
+    storedSchedule = JSON.parse(localStorage.getItem('todaySchedule'));
     storedDate = JSON.parse(localStorage.getItem('date'));
 
     if (storedSchedule === null) {
       scheduleArr.push(dateObj);
-      localStorage.setItem('schedule', JSON.stringify(scheduleArr));
+      localStorage.setItem('todaySchedule', JSON.stringify(scheduleArr));
     } else {
-      if (storedSchedule[0]['date'] !== storedDate[0]['date']) {
-        localStorage.removeItem('schedule');
+      var scheduleDate = storedSchedule[0]['date'];
+      if (scheduleDate !== todaysDate) {
+        var oldSchedule = storedSchedule;
+        localStorage.setItem(scheduleDate, JSON.stringify(oldSchedule));
+        localStorage.removeItem('todaySchedule');
         scheduleArr.push(dateObj);
-        localStorage.setItem('schedule', JSON.stringify(scheduleArr));
-      } 
+        localStorage.setItem('todaySchedule', JSON.stringify(scheduleArr));
+      }
     }
   }
 
   function displaySchedule() {
-    savedSchedule = JSON.parse(localStorage.getItem('schedule'));
+    savedSchedule = JSON.parse(localStorage.getItem('todaySchedule'));
 
     if (savedSchedule !== null) {
       for (var i = 0; i < savedSchedule.length; i++) {
@@ -107,8 +105,8 @@ $(document).ready(function() {
     }
   }
 
-  function getLocalStorage() {
-    var existingStorage = JSON.parse(localStorage.getItem('schedule'));
+  function checkLocalStorage() {
+    var existingStorage = JSON.parse(localStorage.getItem('todaySchedule'));
 
     if (existingStorage !== null) {
       scheduleArr = existingStorage;
