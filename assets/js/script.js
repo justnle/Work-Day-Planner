@@ -11,16 +11,12 @@ $(document).ready(function() {
 
   function init() {
     storeTodaysDate();
-
     update();
-    // setInterval(update, 1000);
-
+    setInterval(update, 1000);
     newDay();
     checkLocalStorage();
-
     scheduleFocus();
     setInterval(scheduleFocus, 1000);
-
     displaySchedule();
     saveEvent();
   }
@@ -42,7 +38,6 @@ $(document).ready(function() {
         '</b>.'
     );
     $('#title-year').html(currentYear);
-    setInterval(update, 1000);
   }
 
   function saveEvent() {
