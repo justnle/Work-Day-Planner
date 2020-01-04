@@ -3,6 +3,14 @@ html {
   position: relative;
 }
 
+body {
+  background-image: url('https://github.com/twopcz/HW-5/blob/master/assets/images/dot-grid.png?raw=true');
+}
+
+th {
+  background-color: white;
+}
+
 th,
 td {
   border-right: 1px solid lightgrey;
