@@ -11,13 +11,13 @@ $(document).ready(function() {
 
   function init() {
     storeTodaysDate();
-    update();
-    setInterval(update, 1000);
-    newDay();
+    updateTime();
+    setInterval(updateTime, 1000);
+    startNewDay();
     checkLocalStorage();
+    displaySchedule();
     scheduleFocus();
     setInterval(scheduleFocus, 1000);
-    displaySchedule();
     saveEvent();
     clearSchedule();
   }
@@ -28,7 +28,7 @@ $(document).ready(function() {
     localStorage.setItem('date', JSON.stringify(dateArr));
   }
 
-  function update() {
+  function updateTime() {
     var currentDate = moment().format('dddd, MMMM Do');
     var currentYear = moment().format('YYYY');
     var currentTime = moment().format('HH:mm:ss');
@@ -70,7 +70,7 @@ $(document).ready(function() {
     });
   }
 
-  function newDay() {
+  function startNewDay() {
     storedSchedule = JSON.parse(localStorage.getItem('todaySchedule'));
     storedDate = JSON.parse(localStorage.getItem('date'));
 
