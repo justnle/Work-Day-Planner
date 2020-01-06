@@ -1,5 +1,5 @@
 # Work Day Planner
-A planner for a typical American work day (0900 to 1700) created using HTML and JavaScript (jQuery). This web page also incorporates the usage of the Moment.js library to display the date and time. Events can be entered in the row corresponding to the time, which can then be saved. The color/focus of the row changes with the time: grey being time past, green being the current hour and blue for events later in the day.
+A planner for a typical American work day (0900 to 1700) created using HTML and JavaScript (jQuery). This web page also incorporates the usage of the Moment.js library to display the date and time. Events can be entered in the row corresponding to the time, which can then be saved. The color/focus of the row changes with the time: grey being time past, light blue being the current hour and dark blue for events later in the day.
 
 [Work Day Planner](https://twopcz.github.io/HW-5/)
 
