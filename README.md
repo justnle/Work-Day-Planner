@@ -3,8 +3,12 @@ A planner for a typical American work day (0900 to 1700) created using HTML and 
 
 [Work Day Planner](https://twopcz.github.io/HW-5/)
 
+![Day-Planner-Screenshot](https://github.com/twopcz/HW-5/blob/master/assets/images/day-planner.png?raw=true)
+
 # Usage
-The user clicks into the textarea/row and inputs the event to be penciled in for that corresponding hour. Clicking the icon to the right saves the user's input to `localStorage` so that the data persists. The user can clear their entire schedule by clicking the 'Clear Schedule' button, or they can clear an individual event and save it again to clear that time slot.
+The user clicks into the text area/row and inputs the event to be penciled in for that corresponding hour. Clicking the icon to the right saves the user's input to `localStorage` so that the data persists. The user can clear their entire schedule by clicking the 'Clear Schedule' button, or they can clear an individual event and save it again to clear that time slot.
+
+The user can also change the current day that is being displayed and continue to plan out their past and future days. This functionality was added well after HW-5 was due, but I found adapting my previous code to allow those changes was challenging and fun to complete.
 
 # References
 [https://getbootstrap.com/](https://getbootstrap.com/) - Bootstrap library <br>
