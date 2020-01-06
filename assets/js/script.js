@@ -62,7 +62,7 @@ $(document).ready(function() {
         'Here is what your schedule looked like for this day.'
       );
       $('#dynamic-time').hide();
-      
+
       var dayOfYear = moment().dayOfYear();
       if (dayOfYear + day === 0) {
         currentYear = previousDate.format('YYYY');
@@ -77,7 +77,6 @@ $(document).ready(function() {
       $('#title-year').html(currentYear);
       $('#dynamic-time').hide();
     } else {
-      console.log('zero hopefully ' + day);
       currentYear = moment().format('YYYY');
       $('#title-time').html(
         'Here is your schedule for today. The current time is: '
