@@ -57,13 +57,17 @@ $(document).ready(function() {
     }
 
     if (day < 0) {
-      currentYear = previousDate.format('YYYY');
       $('#title-date').html(differentDate);
       $('#title-time').html(
         'Here is what your schedule looked like for this day.'
       );
-      $('#title-year').html(currentYear);
       $('#dynamic-time').hide();
+      
+      var dayOfYear = moment().dayOfYear();
+      if (dayOfYear + day === 0) {
+        currentYear = previousDate.format('YYYY');
+        $('#title-year').html(currentYear);
+      }
     } else if (day > 0) {
       currentYear = nextDate.format('YYYY');
       $('#title-date').html(differentDate);
@@ -73,9 +77,12 @@ $(document).ready(function() {
       $('#title-year').html(currentYear);
       $('#dynamic-time').hide();
     } else {
+      console.log('zero hopefully ' + day);
+      currentYear = moment().format('YYYY');
       $('#title-time').html(
         'Here is your schedule for today. The current time is: '
       );
+      $('#title-year').html(currentYear);
       $('#dynamic-time').show();
       dynamicTime();
     }
