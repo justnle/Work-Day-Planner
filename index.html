@@ -28,8 +28,8 @@
             <h4 class="font-weight-bold" id="title-year"></h4>
           </div>
         </div>
-        <div id="current-date-time">
-          <p class="lead" id="title-time"></p>
+        <div class="d-flex" id="current-date-time">
+          <p class="lead" id="title-time"><div class="font-weight-bold lead pl-1" id="dynamic-time"></div></p>
         </div>
       </div>
     </div>
@@ -185,7 +185,22 @@
           </tbody>
         </table>
         <div class="d-flex pb-2">
-          <div class="ml-auto">
+          <div class="pl-1" id="change-div">
+            <nav aria-label="page">
+              <ul class="pagination">
+                <li class="page-item" id="previous">
+                  <a class="page-link" href="#" id="previous-day">Previous</a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="#" id="current-day">Today</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#" id="next-day">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="ml-auto pr-1">
             <button type="button" class="btn btn-danger" id="clear-button">
               Clear Schedule
             </button>
