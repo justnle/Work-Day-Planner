@@ -96,23 +96,29 @@ $(document).ready(function() {
       })
       .get();
 
-    for (var i = 0; i < timeIDs.length; i++) {
-      var timeIDsInt = parseInt(timeIDs[i]);
-      if (timeIDsInt < currentHourInt) {
-        $('#' + timeIDs[i])
-          .find('textarea')
-          .css('background-color', 'grey');
-      } else if (timeIDsInt === currentHourInt) {
-        $('#' + timeIDs[i])
-          .find('textarea')
-          .css('background-color', '#ccffff');
-      } else {
-        $('#' + timeIDs[i])
-          .find('textarea')
-          .css('background-color', 'lightblue');
+    if (day < 0) {
+      $('.input-area').css('background-color', 'grey');
+    } else if (day > 0) {
+      $('.input-area').css('background-color', 'lightblue');
+    } else {
+      for (var i = 0; i < timeIDs.length; i++) {
+        var timeIDsInt = parseInt(timeIDs[i]);
+        if (timeIDsInt < currentHourInt) {
+          $('#' + timeIDs[i])
+            .find('textarea')
+            .css('background-color', 'grey');
+        } else if (timeIDsInt === currentHourInt) {
+          $('#' + timeIDs[i])
+            .find('textarea')
+            .css('background-color', '#ccffff');
+        } else {
+          $('#' + timeIDs[i])
+            .find('textarea')
+            .css('background-color', 'lightblue');
+        }
       }
     }
-    setInterval(scheduleFocus, 1000);
+    // setInterval(scheduleFocus, 1000);
   }
 
   function clearSchedule() {
@@ -142,7 +148,6 @@ $(document).ready(function() {
   function changeDay() {
     $('nav').on('click', function(e) {
       var dayButtonID = e.target.id;
-      var activeClass = $('#change-div>nav>ul>li.active');
 
       if (dayButtonID === 'previous-day') {
         day--;
@@ -153,6 +158,7 @@ $(document).ready(function() {
         storeDifferentDate();
         updateTime(previousDate.format('dddd, MMMM Do'));
         displaySchedule();
+        scheduleFocus();
         return date;
       } else if (dayButtonID === 'next-day') {
         day++;
@@ -163,6 +169,7 @@ $(document).ready(function() {
         storeDifferentDate();
         updateTime(nextDate.format('dddd, MMMM Do'));
         displaySchedule();
+        scheduleFocus();
         return date;
       } else {
         day = 0;
@@ -173,6 +180,7 @@ $(document).ready(function() {
         $('.input-area').val('');
         updateTime();
         displaySchedule();
+        scheduleFocus();
         return date;
       }
     });
